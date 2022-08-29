@@ -28,5 +28,5 @@ jobs:
           api-level: 29
           arch: x86_64
           profile: Nexus 6
-          # 기본적으로 Emulator 하나만 실행되므로, -d 옵션이 필요 없지 않나?
-          script: flutter test integration_test
+          # 기본적으로 Emulator 하나만 실행되므로, -d 옵션이 필요 없다.
+          script: flutter test integration_test/app_test.dart
