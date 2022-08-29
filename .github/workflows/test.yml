@@ -11,7 +11,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      # MacOS 전용으로 빌드 할 때에는 Java 셋업이 필요 없다.
+      - uses: actions/setup-java@v1
+        with:
+          # 메인 버전은 12 이고, 서브 버전은 아무거나
+          java-version: "12.x"
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
