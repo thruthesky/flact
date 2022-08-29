@@ -20,8 +20,8 @@ jobs:
           channel: 'stable'
           architecture: x64
       - run: flutter pub get
-      # Run integration test
-      - name: Run Flutter Integration tests
+
+      - name: Run Integration test
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
