@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.act">
+    package="com.githubactions.flutter_git_actions_test">
    <application
         android:label="act"
         android:name="${applicationName}"

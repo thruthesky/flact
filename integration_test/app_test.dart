@@ -26,5 +26,12 @@ void main() {
       // Verify the counter increments by 1.
       expect(find.text('1'), findsOneWidget);
     });
+    testWidgets('Finds nothing test', (tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      // Verify the counter increments by 1.
+      expect(find.text('no text'), findsNothing);
+    });
   });
 }
