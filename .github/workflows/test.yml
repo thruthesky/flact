@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # MacOS 전용으로 빌드 할 때에는 Java 셋업이 필요 없다.
-      - uses: subosito/flutter-actions@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
