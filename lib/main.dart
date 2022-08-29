@@ -49,19 +49,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              StreamBuilder<DocumentSnapshot>(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Expanded(
+              child: StreamBuilder<DocumentSnapshot>(
                 stream: FirebaseFirestore.instance.collection('settings').doc('admins').snapshots(),
                 builder: ((context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (snapshot.hasError) return Text(snapshot.error.toString());
@@ -74,11 +74,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     return const Text('Document not exists');
                   }
 
-                  return Text('Stream Builder; ${(snapshot.data?.data() as Map).keys.join(',')}');
+                  return ListView(
+                    children: (snapshot.data?.data() as Map).keys.map((e) => Text(e)).toList(),
+                  );
+
+                  // return Text('Stream Builder; ${(snapshot.data?.data() as Map).keys.join(',')}');
                 }),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
