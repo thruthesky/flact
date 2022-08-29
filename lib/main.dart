@@ -68,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   return const CircularProgressIndicator.adaptive();
                 }
                 if (snapshot.hasData == false) return const Text('No data');
-                final snap = snapshot.data!;
 
                 if (snapshot.data == null || snapshot.data!.exists == false) {
                   return const Text('Document not exists');
