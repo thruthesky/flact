@@ -49,34 +49,36 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseFirestore.instance.collection('settings').doc('admins').snapshots(),
-              builder: ((context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                if (snapshot.hasError) return Text(snapshot.error.toString());
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator.adaptive();
-                }
-                if (snapshot.hasData == false) return const Text('No data');
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance.collection('settings').doc('admins').snapshots(),
+                builder: ((context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (snapshot.hasError) return Text(snapshot.error.toString());
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator.adaptive();
+                  }
+                  if (snapshot.hasData == false) return const Text('No data');
 
-                if (snapshot.data == null || snapshot.data!.exists == false) {
-                  return const Text('Document not exists');
-                }
+                  if (snapshot.data == null || snapshot.data!.exists == false) {
+                    return const Text('Document not exists');
+                  }
 
-                return Text('Stream Builder; ${snapshot.data?.data()}');
-              }),
-            )
-          ],
+                  return Text('Stream Builder; ${snapshot.data?.data()}');
+                }),
+              )
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
