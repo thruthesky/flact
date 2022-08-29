@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     return const Text('Document not exists');
                   }
 
-                  return Text('Stream Builder; ${snapshot.data?.data()}');
+                  return Text('Stream Builder; ${(snapshot.data?.data() as Map).keys.join(',')}');
                 }),
               )
             ],
