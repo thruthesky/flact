@@ -1,4 +1,5 @@
 import 'package:act/firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +60,23 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance.collection('settings').doc('admins').snapshots(),
+              builder: ((context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.hasError) return Text(snapshot.error.toString());
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator.adaptive();
+                }
+                if (snapshot.hasData == false) return const Text('No data');
+                final snap = snapshot.data!;
+
+                if (snapshot.data == null || snapshot.data!.exists == false) {
+                  return const Text('Document not exists');
+                }
+
+                return Text('Stream Builder; ${snapshot.data?.data()}');
+              }),
+            )
           ],
         ),
       ),
