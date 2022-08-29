@@ -1,0 +1,19 @@
+
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  runs-on: macos-latest
+  steps:
+    - uses: actions/checkout@v3
+    # MacOS 전용으로 빌드 할 때에는 Java 셋업이 필요 없다.
+    - uses: subosito/flutter-actions@v2
+      with:
+        channel: 'stable'
+        architecture: x64
+    - run: flutter pub get
+    - run: flutter test
